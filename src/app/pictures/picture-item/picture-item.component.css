@@ -1,0 +1,24 @@
+
+.mat-card{
+  background: rgb(136,8,98);
+  background: linear-gradient(0deg, rgba(136,8,98,0.26) 0%,rgba(136,8,98,0.3) 33%, rgba(28, 122, 113, 0.4) 100%);
+  border-radius:0;
+  color: rgb(197, 248, 248);
+  transition:ease-in-out 1ms;
+
+  /* clip-path: polygon(5% 0, 100% 0%, 95% 100%, 0% 100%); */
+
+}
+img{
+  width:calc(100% - 0.4em);
+  height:45vh;
+  margin:0 0.2em 0 0.2em;
+  margin-bottom:0;
+  /* clip-path: polygon(5% 0, 100% 0%, 95% 100%, 0% 100%); */
+  border-radius: 2%;
+}
+.mat-card:hover{
+  transform: scale(105%);
+  cursor: pointer;
+  z-index:100;
+}

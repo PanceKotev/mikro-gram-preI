@@ -1,0 +1,13 @@
+<div class="content" fxLayout="row wrap" fxLayoutGap="1.2em grid" fxLayoutGap.xs="3em grid" >
+  <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let picture of pictures|async">
+    <mkg-picture-item [routerLink]="['/pictures', picture.id]"
+      [title]="picture.title"[url]="picture.thumbnailUrl">
+    </mkg-picture-item>
+  </div>
+</div>
+<!-- <mat-grid-list style="height:100vh" cols="3" rowHeight="fit" gutterSize="1.5em">
+  <mat-grid-tile class="mat-elevation-z3 pic-tile" *ngFor="let picture of pictures|async">
+    <mkg-picture-item [title]="picture.title"[url]="picture.thumbnailUrl">
+    </mkg-picture-item>
+  </mat-grid-tile>
+</mat-grid-list> -->

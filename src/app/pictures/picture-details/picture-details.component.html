@@ -1,0 +1,45 @@
+<div class="content" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="grid">
+  <div fxFlex="55%" fxFill="true" class="side-image">
+    <img class="detail-image" [src]="picture.url" />
+  </div>
+  <form (ngSubmit)="updatePicture(editForm.value)" #editForm="ngForm" fxFlex="43%" class="right-content">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label class="pic-label">Title:</mat-label>
+        <input name="title" (change)="changedData('title')" matInput [(ngModel)]="editedPicture.title" [readonly]="!editMode" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label class="pic-label">Album Id:</mat-label>
+        <input name="albumId" (change)="changedData('albumId')" matInput [(ngModel)]="editedPicture.albumId" [readonly]="!editMode" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label class="pic-label">Url:</mat-label>
+        <input (change)="changedData('url')" name='url' matInput [(ngModel)]="editedPicture.url" [readonly]="!editMode" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label class="pic-label">Thumbnail Url:</mat-label>
+        <input (change)="changedData('thumbnailUrl')" name="thumbnailUrl" matInput [(ngModel)]="editedPicture.thumbnailUrl" [readonly]="!editMode" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <button *ngIf="(editForm.untouched || !this.dataChanged) && editMode" type="button" style="margin-right:2em" mat-icon-button (click)="toggleEditMode()">
+        <mat-icon class="pic-icon" style="color:red">edit</mat-icon>
+      </button>
+      <button *ngIf="!editMode" type="button" style="margin-right:2em" mat-icon-button (click)="toggleEditMode()">
+        <mat-icon class="pic-icon">edit</mat-icon>
+      </button>
+      <button *ngIf="editMode && editForm.touched && this.dataChanged" type="submit" style="margin-right:2em" [disabled]="editForm.invalid" mat-icon-button>
+        <mat-icon class="pic-icon" *ngIf="editMode" [style.color]="editForm.valid?'darkgreen':'red'" >done</mat-icon>
+      </button>
+      <button type="button" mat-icon-button (click)="deletePicture()">
+        <mat-icon class="pic-icon">delete</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>

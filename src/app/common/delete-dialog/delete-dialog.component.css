@@ -1,0 +1,4 @@
+.dialog-bg{
+  background: rgb(136,8,98);
+  background: linear-gradient(0deg, rgba(136,8,98,0.26) 0%,rgba(136,8,98,0.3) 33%, rgba(28, 122, 113, 0.4) 100%);
+}
