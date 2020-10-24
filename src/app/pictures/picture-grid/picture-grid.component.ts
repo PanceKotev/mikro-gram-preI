@@ -9,12 +9,21 @@ import { PictureService } from '../picture.service';
   styleUrls: ['./picture-grid.component.css']
 })
 export class PictureGridComponent implements OnInit {
-  pictures: Observable<IPicture[]>;
+  pictures: IPicture[];
   constructor(private pictureService: PictureService) {
    }
 
   ngOnInit(): void {
-    this.pictures = this.pictureService.getPictures();
+    this.updateData();
+  }
+
+  onScroll(): void{
+    if (this.pictureService.incrementPage()){
+      this.updateData();
+    }
+  }
+  updateData(): void{
+    this.pictureService.getPictures().subscribe(pics => this.pictures = pics);
   }
 
 }

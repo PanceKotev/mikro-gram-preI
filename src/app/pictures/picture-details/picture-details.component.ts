@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeleteDialogComponent } from '../../common/delete-dialog/delete-dialog.component';
 import { IPicture } from '../picture.model';
@@ -15,7 +16,12 @@ export class PictureDetailsComponent implements OnInit {
   picture: IPicture;
   editedPicture: IPicture;
   dataChanged = false;
-  constructor(private router: Router, private route: ActivatedRoute, private pictureService: PictureService, public dialog: MatDialog) { }
+  constructor(
+    private snackbar: MatSnackBar,
+    private router: Router,
+    private route: ActivatedRoute,
+    private pictureService: PictureService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -28,16 +34,23 @@ export class PictureDetailsComponent implements OnInit {
 
   toggleEditMode(): void{
     this.editMode = !this.editMode;
+    if (this.editMode){
+      this.snackbar.open('You\'re in edit mode', 'dismiss', {
+        duration: 750
+      });
+    }
   }
   deletePicture(): void{
-    const dialogRef = this.dialog.open(DeleteDialogComponent,{
-      data: {title: this.picture.title},
-      panelClass: ['dialog-bg']
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: {title: this.picture.title}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result){
         this.pictureService.deletePicture(this.picture.id);
-        this.router.navigate(['\pictures']);
+        this.snackbar.open('Picture deleted.', 'dismiss',{
+          duration: 1000
+        });
+        this.router.navigate(['/pictures']);
       }
     });
   }
@@ -50,6 +63,9 @@ export class PictureDetailsComponent implements OnInit {
     this.pictureService.updatePicture(this.editedPicture);
     this.editMode = false;
     this.dataChanged = false;
+  }
+  back(): void{
+    this.router.navigate(['/pictures']);
   }
 
 }

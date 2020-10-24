@@ -1,0 +1,41 @@
+
+<div class="form-container">
+  <form [formGroup]="addPictureForm" (ngSubmit)="addPicture(addPictureForm.value)" class="add-form">
+    <h2 class="form-title">Add new picture</h2>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label class="pic-label">Title:</mat-label>
+        <input formControlName="title" matInput placeholder="Picture Title">
+        <mat-error *ngIf="title.invalid && title.errors.required">You must enter a picture title</mat-error>
+        <mat-error *ngIf="title.invalid && title.errors.maxlength">Title cannot exceed 20 characters.</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label class="pic-label">Album Id:</mat-label>
+        <input  formControlName="albumId" type="number" min="0" max="99" matInput placeholder="album Id">
+        <mat-error *ngIf="albumId.invalid && albumId.errors.required">You must enter an album id</mat-error>
+        <mat-error *ngIf="albumId.invalid && albumId.errors.max">Id must be less than 3 digits</mat-error>
+        <mat-error *ngIf="albumId.invalid && albumId.errors.min">Id cannot be negative</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label class="pic-label">Pic Url:</mat-label>
+        <mat-error *ngIf="url.invalid && url.errors.required">You must enter a picture url</mat-error>
+        <input formControlName="url" matInput placeholder="example.com/example.png">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill" >
+        <mat-label class="pic-label">Thumbnail url:</mat-label>
+        <input formControlName="thumbnailUrl" matInput placeholder="example.com/example.png">
+        <mat-error *ngIf="thumbnailUrl.invalid && thumbnailUrl.errors.required">You must enter a thumbnail url</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="button-container">
+      <button style="margin-right:1em" type="submit" [disabled]="addPictureForm.invalid" mat-flat-button color="primary">Add</button>
+      <button type="button" mat-flat-button color="warn" (click)="cancelAdd()">Close</button>
+    </div>
+  </form>
+</div>

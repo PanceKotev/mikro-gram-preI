@@ -10,20 +10,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { DeleteDialogComponent } from './common/delete-dialog/delete-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ScrollToTopComponent } from './common/scroll-to-top/scroll-to-top.component';
+import { SharedModule } from './common/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    DeleteDialogComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PicturesModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatDialogModule
+    SharedModule,
+    PicturesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

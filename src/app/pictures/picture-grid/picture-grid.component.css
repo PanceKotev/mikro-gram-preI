@@ -1,4 +1,6 @@
-/*
-.content{
-  min-height:100vh;
-} */
+.floating-down{
+  z-index:100;
+  position:fixed;
+  bottom:5%;
+  right: 10%;
+}

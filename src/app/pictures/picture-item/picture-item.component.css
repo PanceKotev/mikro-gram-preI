@@ -5,17 +5,25 @@
   border-radius:0;
   color: rgb(197, 248, 248);
   transition:ease-in-out 1ms;
-
   /* clip-path: polygon(5% 0, 100% 0%, 95% 100%, 0% 100%); */
 
 }
 img{
-  width:calc(100% - 0.4em);
-  height:45vh;
-  margin:0 0.2em 0 0.2em;
+  width:calc(100% - 0.2em);
+  height:42vh;
+  margin:0 0.1em 0 0.1em;
   margin-bottom:0;
   /* clip-path: polygon(5% 0, 100% 0%, 95% 100%, 0% 100%); */
   border-radius: 2%;
+}
+.pic-title{
+  font-size:2.7vmin;
+  height:3.5em;
+
+}
+.pic-header{
+  font-weight: 0;
+  width:100%;
 }
 .mat-card:hover{
   transform: scale(105%);

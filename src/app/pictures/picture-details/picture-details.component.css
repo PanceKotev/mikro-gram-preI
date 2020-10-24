@@ -1,13 +1,12 @@
 .content{
-  min-height:80vh;
+  height:80vh;
   background: rgb(136,8,98);
   background: linear-gradient(0deg, rgba(136,8,98,0.26) 0%,rgba(136,8,98,0.3) 33%, rgba(28, 122, 113, 0.4) 100%);
   color:white;
 }
 
-.dialog-bg{
-  background: rgb(136,8,98);
-  background: linear-gradient(0deg, rgba(136,8,98,0.26) 0%,rgba(136,8,98,0.3) 33%, rgba(28, 122, 113, 0.4) 100%);
+.editMode-on{
+  border: 1px solid red;
 }
 mat-form-field{
   margin-top: 0.1em;
@@ -22,9 +21,11 @@ mat-form-field.mat-form-field {
 }
 .right-content{
   padding-top:1em;
+  padding-right:0.5em;
+
 }
 .detail-image{
-  min-height:80vh;
+  height:80vh;
   width:100%;
   max-width:100%;
 }

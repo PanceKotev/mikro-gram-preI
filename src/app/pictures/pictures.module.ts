@@ -14,13 +14,21 @@ import {MatInputModule} from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PictureAddComponent } from './picture-add/picture-add.component';
+import { HttpClientModule } from '@angular/common/http';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { SharedModule } from '../common/shared.module';
+import { MatTooltipModule  } from '@angular/material/tooltip';
 
 
 
 @NgModule({
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     BrowserAnimationsModule,
+    InfiniteScrollModule,
     MatCardModule,
     MatRippleModule,
     FlexLayoutModule,
@@ -29,13 +37,20 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
+    MatSnackBarModule,
+    MatTooltipModule,
     FormsModule,
+    SharedModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forChild([
+      { path: 'pictures/new', component: PictureAddComponent},
       { path: 'pictures', component: PictureGridComponent },
       { path: 'pictures/:id', resolve: {picture: PictureResolver}, component: PictureDetailsComponent}
     ])
   ],
-  exports: [BrowserAnimationsModule, PictureGridComponent, MatFormFieldModule, RouterModule, MatButtonModule],
-  declarations: [PictureGridComponent, PictureItemComponent, PictureDetailsComponent]
+  exports: [BrowserAnimationsModule, PictureGridComponent, MatFormFieldModule, RouterModule, MatButtonModule
+  ],
+  declarations: [PictureGridComponent, PictureItemComponent, PictureDetailsComponent, PictureAddComponent]
 })
 export class PicturesModule { }

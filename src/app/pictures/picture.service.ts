@@ -1,10 +1,15 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IPicture } from './picture.model';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class PictureService {
-
+  private page = 1;
+  private pictureNm = 18;
+  private maxPage = 10;
+  private apiUrl = 'http://jsonplaceholder.typicode.com/photos';
   private PICTURES: IPicture[] = [
     {
       albumId: 1,
@@ -91,19 +96,42 @@ export class PictureService {
       thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
     }
   ];
-  constructor() { }
+  constructor(private http: HttpClient) { }
   getPictures(): Observable<IPicture[]>{
-    return of(this.PICTURES);
+    const limit = this.page * this.pictureNm;
+    return this.http.get<IPicture[]>(this.apiUrl + '?_start=0&_limit=' + limit)
+    .pipe(catchError(this.handleError<IPicture[]>('getPictures', [])));
   }
   getPicture(id: number): Observable<IPicture>{
-    return of(this.PICTURES.find(item => item.id === id));
+    return this.http.get<IPicture>(this.apiUrl + '/' + id.toString())
+    .pipe(catchError(this.handleError<IPicture>('getPicture')));
   }
   deletePicture(id: number): void {
-    this.PICTURES = this.PICTURES.filter(picture => picture.id !== id);
+    this.http.delete(this.apiUrl + '/' + id.toString())
+    .pipe(catchError(this.handleError<IPicture>('deletePicture')));
   }
   updatePicture(picture: IPicture): void{
-    const picIndex = this.PICTURES.findIndex(pic => pic.id === picture.id);
-    this.PICTURES[picIndex] = picture;
+    const options = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
+    this.http.put(this.apiUrl + '/' + picture.id.toString(), picture, options)
+    .pipe(catchError(this.handleError<IPicture>('updatePicture')));
+  }
+  addPicture(formValues: any): void {
+    const options = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
+    this.http.post<IPicture>(this.apiUrl, formValues, options)
+    .pipe(catchError(this.handleError<IPicture>('addPicture')));
+  }
+  incrementPage(): boolean{
+    if (this.page < this.maxPage){
+      this.page++;
+      return true;
+     }
+    return false;
+  }
+  private handleError<T>(operation = 'operation', result?: T): any{
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
   }
 
 }

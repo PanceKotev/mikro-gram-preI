@@ -1,0 +1,29 @@
+mat-form-field{
+  width:100%;
+  color:white;
+}
+.form-container{
+  display: flex;
+  width:calc(100% - 1em);
+
+  padding:1em;
+}
+.add-form{
+  width:45%;
+  min-height:80vh;
+  background: rgb(136,8,98);
+  background: linear-gradient(0deg, rgba(136,8,98,0.26) 0%,rgba(136,8,98,0.3) 33%, rgba(28, 122, 113, 0.4) 100%);
+  padding:2em;
+  border-radius:6%;
+  margin: 0 auto;
+}
+.form-title{
+  width:100%;
+  color:white;
+  font-size:4vmin;
+  font-weight: bold;
+  text-align: center;
+}
+.button-container{
+  margin-top:1em;
+}
