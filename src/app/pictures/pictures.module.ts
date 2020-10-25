@@ -21,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SharedModule } from '../common/shared.module';
 import { MatTooltipModule  } from '@angular/material/tooltip';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -39,6 +41,8 @@ import { MatTooltipModule  } from '@angular/material/tooltip';
     MatDialogModule,
     MatSnackBarModule,
     MatTooltipModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
     FormsModule,
     SharedModule,
     ReactiveFormsModule,

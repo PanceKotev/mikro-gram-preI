@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 
@@ -18,10 +19,11 @@ import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
     MatButtonModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatSidenavModule,
     MatIconModule,
     RouterModule,
   ],
-  exports: [DeleteDialogComponent, ScrollToTopComponent, NavbarComponent],
+  exports: [DeleteDialogComponent, ScrollToTopComponent, NavbarComponent, MatSidenavModule],
   declarations: [NavbarComponent, ScrollToTopComponent, DeleteDialogComponent],
   providers: [],
 })

@@ -7,100 +7,30 @@ import {catchError} from 'rxjs/operators';
 @Injectable({providedIn: 'root'})
 export class PictureService {
   private page = 1;
-  private pictureNm = 18;
-  private maxPage = 10;
+  private pictureNm = 60;
+  public initial = true;
+  private maxPage = 83;
+  private maxPictures = 4999;
+  public pagination = false;
   private apiUrl = 'http://jsonplaceholder.typicode.com/photos';
-  private PICTURES: IPicture[] = [
-    {
-      albumId: 1,
-      id: 1,
-      title: 'Panda',
-      url: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg',
-      thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
-    },
-    {
-      albumId: 1,
-      id: 2,
-      title: 'Idiot',
-      url: 'https://via.placeholder.com/600/92c952',
-      thumbnailUrl: 'https://via.placeholder.com/150/92c952'
-    },
-    {
-      albumId: 1,
-      id: 3,
-      title: 'Lemur',
-      url: 'https://lh3.googleusercontent.com/proxy/qnWEiRK5mU8VoHpiQN9jhGXjIXozKtQ-wSSuoBX5BUDz78WjecXNE_5FCmPjWmSnzmxLT_ft8XipRkUSHjD5C3IGU6tLEsuaRsWYLrnVwcElQqh0DXjiMrnHy8dxmwUoL7evGEq4Q-gg9nhaGFTTJkETtJE9h0uiDa3W',
-      thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
-    },
-    {
-      albumId: 2,
-      id: 4,
-      title: 'Demon',
-      url: 'https://lh3.googleusercontent.com/proxy/qnWEiRK5mU8VoHpiQN9jhGXjIXozKtQ-wSSuoBX5BUDz78WjecXNE_5FCmPjWmSnzmxLT_ft8XipRkUSHjD5C3IGU6tLEsuaRsWYLrnVwcElQqh0DXjiMrnHy8dxmwUoL7evGEq4Q-gg9nhaGFTTJkETtJE9h0uiDa3W',
-      thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
-    },
-    {
-      albumId: 2,
-      id: 4,
-      title: 'Demon',
-      url: 'https://lh3.googleusercontent.com/proxy/qnWEiRK5mU8VoHpiQN9jhGXjIXozKtQ-wSSuoBX5BUDz78WjecXNE_5FCmPjWmSnzmxLT_ft8XipRkUSHjD5C3IGU6tLEsuaRsWYLrnVwcElQqh0DXjiMrnHy8dxmwUoL7evGEq4Q-gg9nhaGFTTJkETtJE9h0uiDa3W',
-      thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
-    },
-    {
-      albumId: 2,
-      id: 4,
-      title: 'Demon',
-      url: 'https://lh3.googleusercontent.com/proxy/qnWEiRK5mU8VoHpiQN9jhGXjIXozKtQ-wSSuoBX5BUDz78WjecXNE_5FCmPjWmSnzmxLT_ft8XipRkUSHjD5C3IGU6tLEsuaRsWYLrnVwcElQqh0DXjiMrnHy8dxmwUoL7evGEq4Q-gg9nhaGFTTJkETtJE9h0uiDa3W',
-      thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
-    },
-    {
-      albumId: 2,
-      id: 4,
-      title: 'Demon',
-      url: 'https://lh3.googleusercontent.com/proxy/qnWEiRK5mU8VoHpiQN9jhGXjIXozKtQ-wSSuoBX5BUDz78WjecXNE_5FCmPjWmSnzmxLT_ft8XipRkUSHjD5C3IGU6tLEsuaRsWYLrnVwcElQqh0DXjiMrnHy8dxmwUoL7evGEq4Q-gg9nhaGFTTJkETtJE9h0uiDa3W',
-      thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
-    },
-    {
-      albumId: 2,
-      id: 4,
-      title: 'Demon',
-      url: 'https://lh3.googleusercontent.com/proxy/qnWEiRK5mU8VoHpiQN9jhGXjIXozKtQ-wSSuoBX5BUDz78WjecXNE_5FCmPjWmSnzmxLT_ft8XipRkUSHjD5C3IGU6tLEsuaRsWYLrnVwcElQqh0DXjiMrnHy8dxmwUoL7evGEq4Q-gg9nhaGFTTJkETtJE9h0uiDa3W',
-      thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
-    },
-    {
-      albumId: 2,
-      id: 4,
-      title: 'Demon',
-      url: 'https://lh3.googleusercontent.com/proxy/qnWEiRK5mU8VoHpiQN9jhGXjIXozKtQ-wSSuoBX5BUDz78WjecXNE_5FCmPjWmSnzmxLT_ft8XipRkUSHjD5C3IGU6tLEsuaRsWYLrnVwcElQqh0DXjiMrnHy8dxmwUoL7evGEq4Q-gg9nhaGFTTJkETtJE9h0uiDa3W',
-      thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
-    },
-    {
-      albumId: 2,
-      id: 4,
-      title: 'Demon',
-      url: 'https://lh3.googleusercontent.com/proxy/qnWEiRK5mU8VoHpiQN9jhGXjIXozKtQ-wSSuoBX5BUDz78WjecXNE_5FCmPjWmSnzmxLT_ft8XipRkUSHjD5C3IGU6tLEsuaRsWYLrnVwcElQqh0DXjiMrnHy8dxmwUoL7evGEq4Q-gg9nhaGFTTJkETtJE9h0uiDa3W',
-      thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
-    },
-    {
-      albumId: 2,
-      id: 4,
-      title: 'Demon',
-      url: 'https://lh3.googleusercontent.com/proxy/qnWEiRK5mU8VoHpiQN9jhGXjIXozKtQ-wSSuoBX5BUDz78WjecXNE_5FCmPjWmSnzmxLT_ft8XipRkUSHjD5C3IGU6tLEsuaRsWYLrnVwcElQqh0DXjiMrnHy8dxmwUoL7evGEq4Q-gg9nhaGFTTJkETtJE9h0uiDa3W',
-      thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
-    },
-    {
-      albumId: 2,
-      id: 4,
-      title: 'Demon',
-      url: 'https://lh3.googleusercontent.com/proxy/qnWEiRK5mU8VoHpiQN9jhGXjIXozKtQ-wSSuoBX5BUDz78WjecXNE_5FCmPjWmSnzmxLT_ft8XipRkUSHjD5C3IGU6tLEsuaRsWYLrnVwcElQqh0DXjiMrnHy8dxmwUoL7evGEq4Q-gg9nhaGFTTJkETtJE9h0uiDa3W',
-      thumbnailUrl: 'https://ichef.bbci.co.uk/news/800/cpsprodpb/17A05/production/_113837769_gettyimages-487432641.jpg'
-    }
-  ];
-  constructor(private http: HttpClient) { }
+  private PICTURES: IPicture[];
+  constructor(private http: HttpClient) {
+    this.http.get<IPicture[]>(this.apiUrl).subscribe(pics => this.PICTURES = pics);
+    // mislev deka e podobro na pocetok da se ceka malce iako e protiv google SEO
+    // zaradi toa shto so concat koga se dodavaat ne se podredeni i koga se vrakjas nanazad od details pak
+    // pocnuvaat od pocetok i pak treba da se loadira celo,
+    // i da se prakjaat get request sekogas, probav so 3g throttling timeout vo grid mi stoi da e okay
+  }
   getPictures(): Observable<IPicture[]>{
-    const limit = this.page * this.pictureNm;
-    return this.http.get<IPicture[]>(this.apiUrl + '?_start=0&_limit=' + limit)
-    .pipe(catchError(this.handleError<IPicture[]>('getPictures', [])));
+    this.initial = this.initial ? false : false;
+    const limit = this.page < this.maxPage ? this.page * this.pictureNm : this.maxPictures;
+    return of(this.PICTURES.slice(0, limit + 1));
+
+  //   const start =  this.page * this.pictureNm;
+  //   const limit = this.page < this.maxPage ? this.pictureNm : 4999 - (this.page * this.pictureNm);
+  //   return this.http.get<IPicture[]>(this.apiUrl + '?_start=0&_limit=' + limit)
+  //  .pipe(catchError(this.handleError<IPicture[]>('getPictures', [])));
+  //  istotaka so concat vo pictureGrid ne doagjaa podredeni so ovoj metod
   }
   getPicture(id: number): Observable<IPicture>{
     return this.http.get<IPicture>(this.apiUrl + '/' + id.toString())
@@ -126,6 +56,9 @@ export class PictureService {
       return true;
      }
     return false;
+  }
+  togglePagination(): void{
+    this.pagination = !this.pagination;
   }
   private handleError<T>(operation = 'operation', result?: T): any{
     return (error: any): Observable<T> => {

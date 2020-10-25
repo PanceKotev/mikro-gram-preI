@@ -10,11 +10,20 @@ import { PictureService } from '../picture.service';
 })
 export class PictureGridComponent implements OnInit {
   pictures: IPicture[];
+  pagination: boolean;
+  loading = true;
   constructor(private pictureService: PictureService) {
    }
 
   ngOnInit(): void {
-    this.updateData();
+    if (this.pictureService.initial){
+      setTimeout(() => {this.updateData(); this.loading = false; }, 800);
+    }
+    else{
+      this.updateData();
+      this.loading = false;
+    }
+    this.pagination = this.pictureService.pagination;
   }
 
   onScroll(): void{

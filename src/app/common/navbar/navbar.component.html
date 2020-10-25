@@ -1,6 +1,17 @@
+<mat-drawer-container hasBackdrop="true" >
+<mat-drawer #drawer class="sidenav" mode="side">
+  <h2 class="top-text">Mikrogram</h2>
+  <h3 class="nav-item" (click)="drawer.close()" [routerLink]="['/pictures']" >Home</h3>
+  <h3 class="nav-item" (click)="drawer.close()" [routerLink]="['/pictures/new']">Add new picture</h3>
+</mat-drawer>
 <mat-toolbar color="primary" class="mkg-toolbar"  class="mat-elevation-z6">
-  <button mat-icon-button >
+  <button mat-icon-button (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
   <span style="font-weight: bold;" [routerLink]="['/pictures']" style="cursor:pointer">Mikrogram</span>
+  <span class="mkg-spacer"></span>
+  <button mat-raised-button (click)="togglePagination()" [color]="pagination?'accent':'primary'">{{pagination?"Paging":"Infinite"}}</button>
 </mat-toolbar>
+<ng-content>
+</ng-content>
+</mat-drawer-container>

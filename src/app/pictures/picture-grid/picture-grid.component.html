@@ -1,12 +1,15 @@
-<div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="40" (scrolled)="onScroll()" class="content" fxLayout="row wrap" fxLayoutGap="1.2em grid" fxLayoutGap.xs="3em grid" >
-  <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let picture of pictures">
-    <mkg-picture-item [routerLink]="['/pictures', picture.id]"
-      [title]="picture.title"[url]="picture.thumbnailUrl">
-    </mkg-picture-item>
-  </div>
+<div *ngIf="!loading && !pagination">
+  <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="40" (scrolled)="onScroll()" class="content" fxLayout="row wrap" fxLayoutGap="1.2em grid" fxLayoutGap.xs="3em grid" >
+    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let picture of pictures">
+      <mkg-picture-item [routerLink]="['/pictures', picture.id]"
+        [title]="picture.title"[url]="picture.thumbnailUrl">
+      </mkg-picture-item>
+    </div>
 
+  </div>
+  <mkg-scroll-to-top></mkg-scroll-to-top>
 </div>
-<mkg-scroll-to-top></mkg-scroll-to-top>
-<button matTooltip="Add picture" color="primary" mat-fab class="floating-down" [routerLink]="['/pictures/new']" >
+<mat-spinner style="margin:5% auto;" *ngIf="loading"></mat-spinner>
+<button *ngIf="!loading" color="primary" mat-fab class="floating-down" [routerLink]="['/pictures/new']" >
   <mat-icon>add</mat-icon>
 </button>

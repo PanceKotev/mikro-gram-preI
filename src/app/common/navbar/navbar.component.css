@@ -1,1 +1,21 @@
 
+.sidenav{
+  width:20vw;
+  background:#c2185b;
+  padding:1em;
+}
+.top-text{
+  border-bottom: 0.1em solid white;
+}
+.mkg-spacer{
+  flex: 1 1 auto;
+}
+.nav-item{
+  font-weight: bold;
+  cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+  .sidenav{
+    width:35vw;
+  }
+}
