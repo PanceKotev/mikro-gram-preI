@@ -5,9 +5,6 @@
   color:white;
 }
 
-.editMode-on{
-  border: 1px solid red;
-}
 mat-form-field{
   margin-top: 0.1em;
   min-width:60%;

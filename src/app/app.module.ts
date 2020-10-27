@@ -12,6 +12,9 @@ import { DeleteDialogComponent } from './common/delete-dialog/delete-dialog.comp
 import { MatDialogModule } from '@angular/material/dialog';
 import { ScrollToTopComponent } from './common/scroll-to-top/scroll-to-top.component';
 import { SharedModule } from './common/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { SharedModule } from './common/shared.module';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    PicturesModule
+    PicturesModule,
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

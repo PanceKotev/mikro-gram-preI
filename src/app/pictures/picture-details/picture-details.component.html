@@ -31,7 +31,6 @@
       <button style="margin-right:1em" matTooltip="Back" type="button" mat-icon-button (click)="back()">
         <mat-icon class="pic-icon" style="color: rgb(201, 20, 147)">arrow_back</mat-icon>
       </button>
-
       <button matTooltip="Exit Edit" *ngIf="(editForm.untouched || !this.dataChanged) && editMode" type="button" style="margin-right:1em" mat-icon-button (click)="toggleEditMode()">
         <mat-icon class="pic-icon" style="color:red">edit</mat-icon>
       </button>
@@ -44,7 +43,6 @@
       <button type="button" matTooltip="Delete" mat-icon-button (click)="deletePicture()">
         <mat-icon class="pic-icon">delete</mat-icon>
       </button>
-
     </div>
   </form>
 </div>

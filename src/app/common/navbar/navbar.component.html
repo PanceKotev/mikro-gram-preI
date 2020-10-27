@@ -10,7 +10,7 @@
   </button>
   <span style="font-weight: bold;" [routerLink]="['/pictures']" style="cursor:pointer">Mikrogram</span>
   <span class="mkg-spacer"></span>
-  <button mat-raised-button (click)="togglePagination()" [color]="pagination?'accent':'primary'">{{pagination?"Paging":"Infinite"}}</button>
+  <button *ngIf="!(loading$|async)" mat-raised-button (click)="togglePagination()" [color]="(pagination$| async)?'accent':'primary'">{{(pagination$|async)?"Paging":"Infinite"}}</button>
 </mat-toolbar>
 <ng-content>
 </ng-content>

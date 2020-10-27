@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { PictureService } from '../picture.service';
@@ -15,7 +15,9 @@ export class PictureAddComponent implements OnInit {
   url: FormControl;
   thumbnailUrl: FormControl;
   addPictureForm: FormGroup;
-  constructor(private pictureService: PictureService, private router: Router, private snack: MatSnackBar) { }
+  constructor(private pictureService: PictureService,
+              private router: Router,
+              private snack: MatSnackBar) { }
 
   ngOnInit(): void {
     this.title = new FormControl('', [Validators.required, Validators.maxLength(20)]);
@@ -29,6 +31,7 @@ export class PictureAddComponent implements OnInit {
       thumbnailUrl: this.thumbnailUrl
     });
   }
+
   addPicture(formValues: any): void{
     this.pictureService.addPicture(formValues);
     this.snack.open('Successfully added picture', 'dismiss', {
@@ -36,6 +39,7 @@ export class PictureAddComponent implements OnInit {
     });
     this.router.navigate(['/pictures']);
   }
+
   cancelAdd(): void{
     this.router.navigate(['/pictures']);
   }

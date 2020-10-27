@@ -1,12 +1,12 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, HostListener, Inject, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Inject} from '@angular/core';
 
 @Component({
   selector: 'mkg-scroll-to-top',
   templateUrl: './scroll-to-top.component.html',
   styleUrls: ['./scroll-to-top.component.css']
 })
-export class ScrollToTopComponent implements OnInit {
+export class ScrollToTopComponent{
   windowScrolled: boolean;
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
@@ -19,6 +19,7 @@ export class ScrollToTopComponent implements OnInit {
           this.windowScrolled = false;
       }
   }
+
   scrollToTop(): void {
     (function smoothscroll(): void {
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -29,7 +30,5 @@ export class ScrollToTopComponent implements OnInit {
     })();
   }
 
-  ngOnInit(): void {
-  }
 
 }

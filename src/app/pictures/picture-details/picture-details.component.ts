@@ -24,7 +24,6 @@ export class PictureDetailsComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-
     this.route.data.forEach((data) => {
       this.picture = data.picture;
       this.editedPicture = {... this.picture};
@@ -44,26 +43,30 @@ export class PictureDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: {title: this.picture.title}
     });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result){
         this.pictureService.deletePicture(this.picture.id);
-        this.snackbar.open('Picture deleted.', 'dismiss',{
+        this.snackbar.open('Picture deleted.', 'dismiss', {
           duration: 1000
         });
         this.router.navigate(['/pictures']);
       }
     });
   }
+
   changedData(property: string): void{
     if (this.picture[property] !== this.editedPicture[property]){
       this.dataChanged = true;
     }
   }
+
   updatePicture(formValues: any): void{
     this.pictureService.updatePicture(this.editedPicture);
     this.editMode = false;
     this.dataChanged = false;
   }
+
   back(): void{
     this.router.navigate(['/pictures']);
   }

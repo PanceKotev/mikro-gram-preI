@@ -1,13 +1,31 @@
-<div *ngIf="!loading && !pagination">
+<div *ngIf="!pagination && !loading">
   <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="40" (scrolled)="onScroll()" class="content" fxLayout="row wrap" fxLayoutGap="1.2em grid" fxLayoutGap.xs="3em grid" >
-    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let picture of pictures">
+    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let picture of pictures">
       <mkg-picture-item [routerLink]="['/pictures', picture.id]"
         [title]="picture.title"[url]="picture.thumbnailUrl">
       </mkg-picture-item>
     </div>
-
   </div>
   <mkg-scroll-to-top></mkg-scroll-to-top>
+</div>
+<div *ngIf="pagination && !loading">
+  <div class="content" fxLayout="row wrap" fxLayoutGap="1.2em grid" fxLayoutGap.xs="3em grid" >
+    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let picture of pictures">
+      <mkg-picture-item [routerLink]="['/pictures', picture.id]"
+        [title]="picture.title"[url]="picture.thumbnailUrl">
+      </mkg-picture-item>
+    </div>
+  </div>
+  <div class="reset-page" >
+    <button color="primary" type="button" matTooltip="Reset to first page" mat-fab (click)="pageChanged({pageIndex: 0, pageSize: 60})" >
+      <mat-icon>replay</mat-icon>
+    </button>
+  </div>
+  <mat-paginator style="margin-top:2%" (page)="pageChanged($event)" [length]="4999"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[15,30,45,60,75,90]"
+    [pageIndex]="page">
+  </mat-paginator>
 </div>
 <mat-spinner style="margin:5% auto;" *ngIf="loading"></mat-spinner>
 <button *ngIf="!loading" color="primary" mat-fab class="floating-down" [routerLink]="['/pictures/new']" >
